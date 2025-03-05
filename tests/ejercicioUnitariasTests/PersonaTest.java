@@ -1,6 +1,10 @@
-package ejerciciosUnitarias;
+package ejercicioUnitariasTests;
 
 import org.junit.jupiter.api.Test;
+
+import ejerciciosUnitarias.Persona;
+
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonaTest {
@@ -17,10 +21,10 @@ public class PersonaTest {
 
     @Test
     public void testConstructorConParametros() {
-        Persona persona = new Persona("Ana", 25, 'M');
-        assertEquals("Ana", persona.getNombre());
-        assertEquals(25, persona.getEdad());
-        assertEquals('M', persona.getSexo());
+        Persona persona = new Persona("Pepe", 19, 'H');
+        assertEquals("Pepe", persona.getNombre());
+        assertEquals(19, persona.getEdad());
+        assertEquals('H', persona.getSexo());
     }
 
     @Test
@@ -44,25 +48,49 @@ public class PersonaTest {
         Persona persona = new Persona("Pepe", 19, 'H');
         assertTrue(persona.esMayorDeEdad());
 
-        Persona menor = new Persona("Laura", 16, 'M');
+        Persona menor = new Persona("Pope", 15, 'H');
         assertFalse(menor.esMayorDeEdad());
+        
+        Persona persona2 = new Persona("Pape", 18, 'M');
+        assertTrue(persona2.esMayorDeEdad());
     }
 
     @Test
     public void testCalcularIMC() {
-        Persona persona = new Persona("Luis", 28, 'H', 70, 1.75); // IMC ≈ 22.86 (Peso ideal)
-        assertEquals(Persona.PESO_IDEAL, persona.calcularIMC());
+        Persona ideal = new Persona("Luis", 28, 'H', 70, 1.75);
+        assertEquals(Persona.PESO_IDEAL, ideal.calcularIMC());
 
-        Persona delgada = new Persona("Ana", 20, 'M', 45, 1.70); // IMC ≈ 15.57 (Infrapeso)
+        Persona delgada = new Persona("Ana", 20, 'M', 45, 1.70);
         assertEquals(Persona.INFRAPESO, delgada.calcularIMC());
 
-        Persona sobrepeso = new Persona("Pedro", 35, 'H', 90, 1.70); // IMC ≈ 31.14 (Sobrepeso)
+        Persona sobrepeso = new Persona("Pedro", 35, 'H', 90, 1.70);
         assertEquals(Persona.SOBREPESO, sobrepeso.calcularIMC());
     }
 
-    @Test
+	@Test
     public void testComprobarSexo() {
-        Persona persona = new Persona("Alex", 22, 'X'); // Sexo inválido
+        Persona persona = new Persona("Alex", 22, 'X');
+        Persona persona2 = new Persona("Miguel", 50, 'H');
         assertEquals('H', persona.getSexo());
+        assertNotEquals('M', persona2.getSexo());
     }
+	
+	@Test
+	public void setNombre() {
+		Persona persona = new Persona("", 9, 'M');
+		Persona persona2 = new Persona("Luis", 98, 'H');
+		persona.setNombre("Luisa");
+		persona2.setNombre("Luis");
+		assertTrue(persona.toString().contains("Nombre: Luisa"));
+		assertTrue(persona2.toString().contains("Nombre: Luis"));
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+ 
 }
